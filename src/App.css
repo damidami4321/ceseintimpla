@@ -19,7 +19,7 @@ body {
 /* Rain effect improvements */
 .rain {
   position: absolute;
-  width: 100%;
+  width: 90%;
   height: 100%;
   top: 0;
   left: 0;
