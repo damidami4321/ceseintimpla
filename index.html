@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doar pentru Marinela 💖</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to right, #ffe6f0, #ffccf2);
+            font-family: 'Pacifico', cursive;
+            text-align: center;
+            padding: 2rem;
+            color: #99004d;
+        }
+        .question-box {
+            background: white;
+            border-radius: 2rem;
+            padding: 2rem;
+            box-shadow: 0 0 20px rgba(255, 0, 128, 0.2);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        button {
+            background-color: #ff66b3;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 1rem;
+            font-size: 1.2rem;
+            margin: 0.5rem;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #e60073;
+        }
+        .hidden {
+            display: none;
+        }
+        audio {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>💕 Pentru Marinela 💕</h1>
+    <p>Fă-ți puțin timp și răspunde sincer 😘</p>
+
+    <form action="https://formspree.io/f/mnqegoqr" method="POST">
+        <div class="question-box" id="q1">
+            <p>Ai prieten? 💬</p>
+            <button type="button" onclick="next('q2')">Da, dar tu ești mai important 😘</button>
+            <button type="button" onclick="next('q2')">Nu 😇</button>
+        </div>
+
+        <div class="question-box hidden" id="q2">
+            <p>Vrei să fii cu mine împreună? 💑</p>
+            <button type="button" onclick="next('phone')">Da 😍</button>
+            <button type="button" onclick="next('q3')">Nu 😢</button>
+        </div>
+
+        <div class="question-box hidden" id="phone">
+            <p>Lasă-mi numărul tău de telefon 📱</p>
+            <input type="text" name="telefon" required placeholder="07xxxxxxxx">
+            <br><br>
+            <button type="submit">Trimite ❤️</button>
+        </div>
+
+        <div class="question-box hidden" id="q3">
+            <p>Ești sigură? 🤔</p>
+            <button type="button" onclick="next('q4')">Da 😥</button>
+            <button type="button" onclick="next('q2')">Nu prea 😳</button>
+        </div>
+
+        <div class="question-box hidden" id="q4">
+            <p>Ești sigură sigură? 😟</p>
+            <button type="button" onclick="next('q5')">Da 😔</button>
+            <button type="button" onclick="next('q2')">Nu prea 😬</button>
+        </div>
+
+        <div class="question-box hidden" id="q5">
+            <p>Vrei să fii cu mine? 💘</p>
+            <button type="button" onclick="next('q6')">Da 😚</button>
+            <button type="button" onclick="next('q6')">Sigur 😘</button>
+        </div>
+
+        <div class="question-box hidden" id="q6">
+            <p>Cine e băiatul perfect? 😎</p>
+            <input type="text" name="baiatul_perfect" required placeholder="Scrie numele lui...">
+            <br><br>
+            <button type="submit">Trimite ❤️</button>
+        </div>
+    </form>
+
+    <audio autoplay loop>
+        <source src="melodie_romantica.mp3" type="audio/mpeg">
+        Browserul tău nu suportă redarea audio.
+    </audio>
+
+    <script>
+        function next(id) {
+            document.querySelectorAll('.question-box').forEach(el => el.classList.add('hidden'));
+            document.getElementById(id).classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
