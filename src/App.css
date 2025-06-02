@@ -65,7 +65,7 @@ body {
 }
 
 .app-container {
-  min-height: 100vh;
+  min-height: 95vh;
   position: relative;
   display: flex;
   justify-content: center;
@@ -74,7 +74,7 @@ body {
 }
 
 .content-wrapper {
-  max-width: 850px;
+  max-width: 800px;
   width: 100%; /* было 110% — это вылезало за границы экрана */
   padding: 2rem;
   text-align: center;
