@@ -6,17 +6,76 @@ body {
   color: #99004d;
 }
 
+.default-background {
+  background: linear-gradient(to bottom right, #ffe6f0, #fff0f5);
+  transition: background 1s ease;
+}
+
+.sad-background {
+  background: linear-gradient(to bottom right, #6a7ba2, #a0a9bd);
+  transition: background 1s ease;
+}
+
+/* Rain effect improvements */
+.rain {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+  opacity: 0;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.drop {
+  position: absolute;
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, 
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.6)
+  );
+  animation: rain linear infinite;
+  top: -60px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes rain {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.5;
+  }
+  90% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
 .app-container {
   min-height: 100vh;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: all 0.5s ease;
 }
 
 .content-wrapper {
-  max-width: 800px;
-  width: 100%;
+  max-width: 950px;
+  width: 110%;
   padding: 2rem;
   text-align: center;
   position: relative;
@@ -28,6 +87,7 @@ h1 {
   margin-bottom: 2rem;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
   animation: pulse 2s infinite;
+  white-space: nowrap;
 }
 
 @keyframes pulse {
@@ -66,9 +126,16 @@ h1 {
   box-shadow: 0 15px 35px rgba(255, 102, 179, 0.3);
   margin: 0 auto;
   max-width: 600px;
-  transition: all 0.3s ease;
+  transition: all 0.5s ease;
   position: relative;
   overflow: hidden;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.question-box.fade-out {
+  opacity: 0;
+  transform: translateY(20px);
 }
 
 .question-box:hover {
@@ -118,6 +185,7 @@ button:disabled {
   right: 0;
   bottom: 0;
   pointer-events: none;
+  z-index: 2;
 }
 
 .sad-emojis {
@@ -131,26 +199,26 @@ button:disabled {
 @keyframes appearAndGrow {
   0% {
     opacity: 0;
-    transform: scale(0.5);
+    transform: translateY(-100vh) scale(0.3);
   }
   50% {
     opacity: 1;
-    transform: scale(1);
+    transform: translateY(30vh) scale(1.2);
   }
   100% {
-    opacity: 1;
-    transform: scale(1);
+    opacity: 0;
+    transform: translateY(100vh) scale(1);
   }
 }
 
 @keyframes floatUp {
   0% {
     opacity: 0;
-    transform: translateY(0) scale(0.5);
+    transform: translateY(100vh) scale(0.3);
   }
   50% {
     opacity: 1;
-    transform: translateY(-50vh) scale(1);
+    transform: translateY(30vh) scale(1.2);
   }
   100% {
     opacity: 0;
@@ -163,9 +231,23 @@ button:disabled {
   color: #ff1a8c;
   font-size: 1.2rem;
   margin-top: 1rem;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.5s ease forwards 0.5s;
 }
 
-@media (max-width: 600px) {
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 500px) {
   .content-wrapper {
     padding: 1rem;
   }
