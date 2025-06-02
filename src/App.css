@@ -74,7 +74,7 @@ body {
 }
 
 .content-wrapper {
-  max-width: 950px;
+  max-width: 850px;
   width: 100%; /* было 110% — это вылезало за границы экрана */
   padding: 2rem;
   text-align: center;
