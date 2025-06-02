@@ -75,11 +75,12 @@ body {
 
 .content-wrapper {
   max-width: 950px;
-  width: 110%;
+  width: 100%; /* было 110% — это вылезало за границы экрана */
   padding: 2rem;
   text-align: center;
   position: relative;
   z-index: 2;
+  box-sizing: border-box; /* обязательно, чтобы padding учитывался */
 }
 
 h1 {
