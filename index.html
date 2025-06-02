@@ -1,112 +1,129 @@
-
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doar pentru Marinela 💖</title>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-    <style>
-        body {
-            background: linear-gradient(to right, #ffe6f0, #ffccf2);
-            font-family: 'Pacifico', cursive;
-            text-align: center;
-            padding: 2rem;
-            color: #99004d;
-        }
-        .question-box {
-            background: white;
-            border-radius: 2rem;
-            padding: 2rem;
-            box-shadow: 0 0 20px rgba(255, 0, 128, 0.2);
-            margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        button {
-            background-color: #ff66b3;
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 1rem;
-            font-size: 1.2rem;
-            margin: 0.5rem;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #e60073;
-        }
-        .hidden {
-            display: none;
-        }
-        audio {
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>❤️ Pentru Marinela ❤️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      background: linear-gradient(to right, #ffe6f0, #ffccf2);
+      font-family: 'Pacifico', cursive;
+      text-align: center;
+      padding: 2rem;
+      color: #99004d;
+    }
+    .question-box {
+      background: white;
+      border-radius: 2rem;
+      padding: 2rem;
+      box-shadow: 0 0 20px rgba(255, 0, 128, 0.2);
+      margin: 2rem auto;
+      max-width: 600px;
+    }
+    button {
+      background-color: #ff66b3;
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 1rem;
+      font-size: 1.2rem;
+      margin: 0.5rem;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #e60073;
+    }
+    .hidden {
+      display: none;
+    }
+    audio {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+    }
+    input {
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      border: 1px solid #ff66b3;
+      font-size: 1rem;
+    }
+  </style>
 </head>
 <body>
-    <h1>💕 Pentru Marinela 💕</h1>
-    <p>Fă-ți puțin timp și răspunde sincer 😘</p>
 
-    <form action="https://formspree.io/f/mnqegoqr" method="POST">
-        <div class="question-box" id="q1">
-            <p>Ai prieten? 💬</p>
-            <button type="button" onclick="next('q2')">Da, dar tu ești mai important 😘</button>
-            <button type="button" onclick="next('q2')">Nu 😇</button>
-        </div>
+  <h1>💘 Pentru Marinela 💘</h1>
+  <p>Răspunde sincer... 😘</p>
 
-        <div class="question-box hidden" id="q2">
-            <p>Vrei să fii cu mine împreună? 💑</p>
-            <button type="button" onclick="next('phone')">Da 😍</button>
-            <button type="button" onclick="next('q3')">Nu 😢</button>
-        </div>
+  <!-- Prima întrebare -->
+  <div class="question-box" id="q1">
+    <p>Ai prieten? 💬</p>
+    <button onclick="goNext(true)">Da, dar tu ești mai important 😍</button>
+    <button onclick="goNext(false)">Nu 😇</button>
+  </div>
 
-        <div class="question-box hidden" id="phone">
-            <p>Lasă-mi numărul tău de telefon 📱</p>
-            <input type="text" name="telefon" required placeholder="07xxxxxxxx">
-            <br><br>
-            <button type="submit">Trimite ❤️</button>
-        </div>
+  <!-- Bucla cu "Vrei să fii cu mine?" -->
+  <div class="question-box hidden" id="loop-question">
+    <p>Vrei să fii cu mine? 💞</p>
+    <button onclick="answerYes()">Da 😚</button>
+    <button onclick="answerNo()">Nu 😢</button>
+  </div>
 
-        <div class="question-box hidden" id="q3">
-            <p>Ești sigură? 🤔</p>
-            <button type="button" onclick="next('q4')">Da 😥</button>
-            <button type="button" onclick="next('q2')">Nu prea 😳</button>
-        </div>
+  <!-- După ce acceptă -->
+  <div class="question-box hidden" id="perfect-boy">
+    <p>Cine e băiatul perfect? 🥰<br>
+    <small style="font-size: 0.9rem; color: #cc0066;">Hint: începe cu D... 😉</small></p>
+    <input type="text" id="boyInput" placeholder="Scrie aici..." />
+    <br><br>
+    <button onclick="checkBoy()">Trimite</button>
+    <p id="errorMsg" style="color: red; display: none;">Hmm... încearcă din nou 😅</p>
+  </div>
 
-        <div class="question-box hidden" id="q4">
-            <p>Ești sigură sigură? 😟</p>
-            <button type="button" onclick="next('q5')">Da 😔</button>
-            <button type="button" onclick="next('q2')">Nu prea 😬</button>
-        </div>
+  <!-- Răspuns corect -->
+  <div class="question-box hidden" id="show-contact">
+    <p>Bravo! Ai dreptate! Damian e perfect 😎<br>
+    📞 Numărul meu este: <strong>060833794</strong></p>
+  </div>
 
-        <div class="question-box hidden" id="q5">
-            <p>Vrei să fii cu mine? 💘</p>
-            <button type="button" onclick="next('q6')">Da 😚</button>
-            <button type="button" onclick="next('q6')">Sigur 😘</button>
-        </div>
+  <!-- Muzica -->
+  <audio autoplay loop>
+    <source src="melodie_romantica.mp3" type="audio/mpeg" />
+    Browserul tău nu suportă redarea audio.
+  </audio>
 
-        <div class="question-box hidden" id="q6">
-            <p>Cine e băiatul perfect? 😎</p>
-            <input type="text" name="baiatul_perfect" required placeholder="Scrie numele lui...">
-            <br><br>
-            <button type="submit">Trimite ❤️</button>
-        </div>
-    </form>
+  <script>
+    let noCount = 0;
 
-    <audio autoplay loop>
-        <source src="melodie_romantica.mp3" type="audio/mpeg">
-        Browserul tău nu suportă redarea audio.
-    </audio>
+    function goNext(hasBoyfriend) {
+      document.getElementById('q1').classList.add('hidden');
+      document.getElementById('loop-question').classList.remove('hidden');
+    }
 
-    <script>
-        function next(id) {
-            document.querySelectorAll('.question-box').forEach(el => el.classList.add('hidden'));
-            document.getElementById(id).classList.remove('hidden');
-        }
-    </script>
+    function answerYes() {
+      noCount = 0;
+      document.getElementById('loop-question').classList.add('hidden');
+      document.getElementById('perfect-boy').classList.remove('hidden');
+    }
+
+    function answerNo() {
+      noCount++;
+      if (noCount >= 10) {
+        answerYes();
+      } else {
+        alert(`Ai răspuns NU de ${noCount} ori. Gândește-te mai bine 😅`);
+      }
+    }
+
+    function checkBoy() {
+      const input = document.getElementById('boyInput').value.trim().toLowerCase();
+      if (input.includes('damian') || input.includes('tu')) {
+        document.getElementById('perfect-boy').classList.add('hidden');
+        document.getElementById('show-contact').classList.remove('hidden');
+      } else {
+        document.getElementById('errorMsg').style.display = 'block';
+      }
+    }
+  </script>
+
 </body>
 </html>
